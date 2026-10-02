@@ -1,0 +1,37 @@
+2026-01-29 10:00:01 INFO  payment-service  Service started successfully on port 8080
+2026-01-29 10:00:05 INFO  db-pool          Connection pool initialized: max=20 current=0
+2026-01-29 10:01:12 INFO  payment-service  Processing payment batch: 450 transactions
+2026-01-29 10:01:15 INFO  db-pool          Active connections: 8/20
+2026-01-29 10:01:45 INFO  db-pool          Active connections: 14/20
+2026-01-29 10:02:03 WARN  db-pool          Connection pool at 85% capacity (17/20)
+2026-01-29 10:02:11 INFO  payment-service  Payment processed: txn_id=TXN-4421 amount=$142.50
+2026-01-29 10:02:18 INFO  payment-service  Payment processed: txn_id=TXN-4422 amount=$89.00
+2026-01-29 10:02:34 WARN  db-pool          Connection pool at 90% capacity (18/20)
+2026-01-29 10:02:51 ERROR db-pool          Connection pool exhausted: max connections reached (20/20)
+2026-01-29 10:02:51 ERROR db-client        Failed to acquire connection: pool exhausted
+2026-01-29 10:02:52 ERROR db-client        Failed to acquire connection: pool exhausted
+2026-01-29 10:02:53 ERROR db-client        Failed to acquire connection: pool exhausted
+2026-01-29 10:03:00 WARN  payment-service  Slow query detected: 5000ms threshold exceeded
+2026-01-29 10:03:21 ERROR payment-service  Database timeout: query exceeded 30s limit
+2026-01-29 10:03:21 ERROR payment-service  Transaction failed: txn_id=TXN-4445
+2026-01-29 10:03:22 ERROR payment-service  Transaction failed: txn_id=TXN-4446
+2026-01-29 10:03:23 ERROR payment-service  Transaction failed: txn_id=TXN-4447
+2026-01-29 10:03:30 INFO  retry-handler    Retry triggered for txn_id=TXN-4445 (attempt 1/3)
+2026-01-29 10:03:31 INFO  retry-handler    Retry triggered for txn_id=TXN-4446 (attempt 1/3)
+2026-01-29 10:03:32 INFO  retry-handler    Retry triggered for txn_id=TXN-4447 (attempt 1/3)
+2026-01-29 10:03:40 ERROR db-client        Retry failed: still cannot acquire connection
+2026-01-29 10:03:41 ERROR db-client        Retry failed: still cannot acquire connection
+2026-01-29 10:03:50 WARN  retry-handler    Retry storm detected: 47 pending retries in queue
+2026-01-29 10:04:01 ERROR payment-service  Circuit breaker OPEN: too many failures
+2026-01-29 10:04:02 ERROR api-gateway      Downstream service unavailable: payment-service
+2026-01-29 10:04:05 ERROR api-gateway      HTTP 503 returned to client: /api/v1/payments
+2026-01-29 10:04:10 WARN  load-balancer    Health check failed: payment-service instance 1
+2026-01-29 10:04:10 WARN  load-balancer    Health check failed: payment-service instance 2
+2026-01-29 10:05:00 INFO  ops-team         Alert triggered: PagerDuty incident #INC-8821
+2026-01-29 10:06:30 INFO  db-admin         Manual intervention: increasing pool size to 50
+2026-01-29 10:06:45 INFO  db-pool          Pool size updated: max=50
+2026-01-29 10:07:00 INFO  payment-service  Connections recovering: 12/50 active
+2026-01-29 10:07:30 INFO  payment-service  Circuit breaker HALF-OPEN: testing recovery
+2026-01-29 10:08:00 INFO  payment-service  Circuit breaker CLOSED: service recovering
+2026-01-29 10:08:30 INFO  payment-service  Payment processing resumed
+2026-01-29 10:08:53 INFO  payment-service  All pending transactions processed
